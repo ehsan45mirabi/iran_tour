@@ -1,0 +1,521 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iran tour</title>
+ 
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
+ 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', Tahoma, sans-serif !important;
+}
+ 
+html { -webkit-text-size-adjust: 100%; }
+body { background: #fff; overflow-x: hidden; }
+img { max-width: 100%; }
+ 
+/* ================= نوار بالا ================= */
+.nav{
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    direction: ltr;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 12px 25px;
+    min-height: 70px;
+    background-color: #102B43;
+}
+ 
+.nav h1{
+    color: white;
+    font-size: 24px;
+    white-space: nowrap;
+}
+ 
+/* دکمه همبرگری (فقط موبایل) */
+.menu-toggle{
+    display: none;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,.35);
+    color: white;
+    font-size: 24px;
+    line-height: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+ 
+
+.welcome-toast {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    color: white;
+    padding: 18px 28px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 99999;
+    box-shadow: 0 8px 25px rgba(0,0,0,.3);
+    animation: showToast .4s ease;
+}
+
+.check-icon {
+    font-size: 24px;
+}
+
+@keyframes showToast {
+    from {
+        opacity: 0;
+        top: 0;
+    }
+    to {
+        opacity: 1;
+        top: 25px;
+    }
+}
+
+
+
+.menu{
+    display: contents;
+}
+ 
+.div1{
+    direction: rtl;
+    display: flex;
+    gap: 50px;
+}
+ 
+.div1 a{
+    text-decoration: none;
+    color: white;
+}
+ 
+.div1 a:hover{
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    transition: 0.7s all;
+    color: #0D9488
+}
+
+.div2{
+    direction: rtl;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-self: end;
+}
+ 
+.div2 a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 5px;
+    width: 120px;
+    background-color: #0D9488;
+    white-space: nowrap;
+}
+ 
+.div2 input{
+    border: 0;
+    border-radius: 14px;
+    height: 28px;
+    padding: 0 12px;
+    outline: none;
+}
+ 
+/* ================= بنر ================= */
+.head{
+    height: 400px;
+}
+ 
+.head img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+ 
+/* ================= مقاصد محبوب ================= */
+.popular-destinations {
+  padding: 45px 5%;
+  background-color: #F5F7FA;
+}
+ 
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+ 
+.section-heading h2 {
+  color: #102B43;
+  font-size: 25px;
+  margin: 0 0 10px;
+}
+ 
+.section-heading p {
+  color: #718096;
+  font-size: 14px;
+  margin: 0;
+}
+ 
+.view-all {
+  color: #0D9488;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+ 
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+}
+ 
+.destination-card {
+  position: relative;
+  display: block;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 12px;
+  text-decoration: none;
+  background: #102B43;
+  box-shadow: 0 4px 12px rgba(16, 43, 67, 0.10);
+}
+ 
+.destination-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+ 
+/* هاور فقط روی دستگاه‌هایی که ماوس دارند */
+@media (hover: hover) {
+  .destination-card:hover img { transform: scale(1.08); }
+}
+ 
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 18px 14px;
+  color: #FFFFFF;
+  background: linear-gradient(
+    to top,
+    rgba(8, 25, 40, 0.92) 0%,
+    rgba(8, 25, 40, 0.35) 40%,
+    transparent 75%
+  );
+}
+ 
+.card-overlay h3 { font-size: 16px; margin: 0 0 8px; }
+.card-overlay p  { font-size: 12px; margin: 0; color: #E2E8F0; }
+.location-icon   { font-size: 22px; }
+ 
+/* ================= فوتر ================= */
+.footer {
+  background-color: #102B43;
+  color: #E2E8F0;
+  padding: 40px 5% 0;
+  margin-top: 0;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 30px;
+  padding-bottom: 30px;
+}
+
+.footer-brand h3 {
+  color: #FFFFFF;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.footer-brand p {
+  font-size: 14px;
+  line-height: 1.9;
+  color: #A0AEC0;
+}
+
+.footer-col h4 {
+  color: #FFFFFF;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+.footer-col ul {
+  list-style: none;
+}
+
+.footer-col li {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.footer-col a {
+  color: #A0AEC0;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-col a:hover {
+  color: #0D9488;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+  padding: 16px 0;
+  font-size: 13px;
+  color: #A0AEC0;
+}
+
+
+
+/* ================= لپ‌تاپ کوچک / تبلت ================= */
+@media (max-width: 1200px) {
+  .destinations-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .div1 { gap: 28px; }
+  .div2 { gap: 16px; }
+}
+ 
+/* ================= موبایل و تبلت کوچک ================= */
+@media (max-width: 1000px) {
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px 16px;
+  }
+ 
+  .nav h1 { font-size: 21px; }
+ 
+  .menu-toggle { display: block; }
+ 
+  .menu {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    margin: 12px 0 6px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,.15);
+    direction: rtl;
+  }
+ 
+  .menu.open { display: flex; }
+ 
+  .div1 {
+    flex-direction: column;
+    gap: 0;
+  }
+ 
+  .div1 a {
+    padding: 13px 0px;
+    font-size: 12px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .div2 {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 12px;
+  }
+ 
+  .div2 a {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 12px;
+  }
+ 
+  .div2 input {
+    width: 100%;
+    height: 44px;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+ 
+  .head { height: 220px; }
+}
+ 
+@media (max-width: 600px) {
+  .popular-destinations { padding: 30px 16px; }
+ 
+  .destinations-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+ 
+  .destination-card { height: 200px; }
+ 
+  .section-heading h2 { font-size: 21px; margin-bottom: 6px; }
+  .section-heading p  { font-size: 12px; }
+  .view-all           { font-size: 13px; }
+ 
+  .card-overlay { padding: 14px 10px; }
+  .card-overlay h3 { font-size: 14px; margin-bottom: 4px; }
+  .location-icon { font-size: 18px; }
+}
+ 
+@media (max-width: 380px) {
+  .head { height: 180px; }
+  .destination-card { height: 175px; }
+  .card-overlay h3 { font-size: 13px; }
+}
+    </style>
+</head>
+<body>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="welcome-toast">
+            <span class="check-icon">✓</span>
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+
+    <nav class="nav">
+        <h1>iran tour</h1>
+ 
+        <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو" aria-expanded="false" aria-controls="menu">☰</button>
+ 
+        <div class="menu" id="menu">
+            <div class="div1">
+                <a href="{% url 'home_url' %}">صفحه اصلی</a>
+                <a href="{% url 'about_url' %}">درباره ما </a>
+                <a href="{% url 'maghsad_url' %}">مقاصد گردشگری</a>
+                <a href="">نمی دونی کجا بری ؟ </a>
+            </div>
+            <div class="div2">
+                {% if request.user.is_authenticated %}
+                  <a href="{% url 'login_register_url' %}">{{request.user.username}}</a>
+                {% else %}
+                  <a href="{% url 'login_register_url' %}">ورود / ثبت نام</a>
+                {% endif %}
+                <form action="#" method="GET">
+                    <input name="q" type="search" placeholder="جستجو...">
+                </form>
+            </div>
+        </div>
+    </nav>
+ 
+    <header class="head">
+        <img src="https://iili.io/nr7tkaj.png" alt="">
+    </header>
+ 
+    <section class="popular-destinations" dir="rtl">
+        <div class="section-heading">
+            <div>
+                <h2>مقاصد محبوب</h2>
+                <p>برخی از زیباترین جاهای دیدنی ایران</p>
+            </div>
+            <a href="{% url 'maghsad_url' %}" class="view-all">مشاهده همه ←</a>
+        </div>
+ 
+        <div class="destinations-grid">
+            {% for tour in card_tours %}
+            <a href="{% url 'details_url' tour.id %}" class="destination-card">
+                <img loading="lazy" src="{{ tour.image }}" alt="{{ tour.title }}">
+                <div class="card-overlay">
+                    <div>
+                        <h3>{{ tour.title }}</h3>
+                        <p>{{ tour.city }}</p>
+                    </div>
+                    <span class="location-icon">⌖</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+        <footer class="footer" dir="rtl">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>iran tour</h3>
+                <p>سفر به زیباترین نقاط ایران را با ما تجربه کنید. مقصد خود را انتخاب کنید و سفری به یادماندنی داشته باشید.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>دسترسی سریع</h4>
+                <ul>
+                    <li><a href="{% url 'home_url' %}">صفحه اصلی</a></li>
+                    <li><a href="{% url 'about_url' %}">درباره ما</a></li>
+                    <li><a href="{% url 'maghsad_url' %}">مقاصد گردشگری</a></li>
+                    <li><a href="{% url 'login_register_url' %}">ورود / ثبت نام</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>تماس با ما</h4>
+                <ul>
+                    <li>ایمیل: info@irantour.com</li>
+                    <li>تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</li>
+                    <li>تهران، ایران</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            © ۱۴۰۵ ایران تور | تمامی حقوق محفوظ است
+        </div>
+    </footer>
+
+
+    <script>
+
+      setTimeout(function() {
+      document.querySelectorAll('.welcome-toast').forEach(function(el) {
+      el.style.transition = 'opacity .5s';
+      el.style.opacity = '0';
+      
+      setTimeout(function() {
+      el.remove();
+      }, 500);
+      });
+      }, 2000);
+
+      const toggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('menu');
+ 
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+        toggle.textContent = open ? '✕' : '☰';
+      });
+    </script>
+</body>
+</html>

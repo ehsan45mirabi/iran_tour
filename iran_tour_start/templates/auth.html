@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ورود و ثبت‌نام | ایران تور</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#e9eef3;--card:#fff;--text:#1f2a37;--muted:#6b7785;--line:#e3e8ee;--field:#f8fafc;--brand:#0f7b6c;--brand-d:#0b6357;--err:#c0392b;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1519;--card:#182026;--text:#e8eef3;--muted:#93a1ae;--line:#2a343c;--field:#1d272e;--brand:#2fb39f;--brand-d:#27a08d;--err:#ff7b6b;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1519;--card:#182026;--text:#e8eef3;--muted:#93a1ae;--line:#2a343c;--field:#1d272e;--brand:#2fb39f;--brand-d:#27a08d;--err:#ff7b6b;color-scheme:dark}
+ 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', Tahoma, sans-serif !important;
+}
+ 
+/* ===== نوار بالا ===== */
+.nav{
+  position:sticky;top:0;z-index:100;direction:ltr;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:12px 25px;min-height:70px;background-color:#102B43;
+}
+.nav h1{margin:0;color:#fff;font-size:24px;text-align:left;white-space:nowrap}
+.menu-toggle{
+  display:none;background:transparent;border:1px solid rgba(255,255,255,.35);
+  color:#fff;font-size:24px;line-height:1;width:44px;height:44px;
+  border-radius:10px;cursor:pointer;
+}
+.menu{display:contents}
+
+.div1 a:hover{
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    transition: 0.7s all;
+    color: #0D9488
+}
+
+.div1{direction:rtl;display:flex;gap:50px}
+.div1 a{color:#fff;text-decoration:none}
+.div2{direction:rtl;display:flex;align-items:center;gap:30px;justify-self:end}
+.div2 a{
+  display:flex;justify-content:center;align-items:center;color:#fff;
+  text-decoration:none;border-radius:10px;padding:5px;width:120px;
+  background-color:#0D9488;white-space:nowrap;
+}
+@media (max-width:1200px){.div1{gap:28px}.div2{gap:16px}}
+@media (max-width:1000px){
+  .nav{display:flex;flex-wrap:wrap;justify-content:space-between;padding:10px 16px;min-height:64px}
+  .nav h1{font-size:21px}
+  .menu-toggle{display:block}
+  .menu{
+    display:none;flex-basis:100%;flex-direction:column;align-items:stretch;gap:14px;
+    margin:12px 0 6px;padding-top:12px;border-top:1px solid rgba(255,255,255,.15);direction:rtl;
+  }
+  .menu.open{display:flex}
+  .div1{flex-direction:column;gap:0}
+  .div1 a{padding:13px 8px;font-size:15px;border-bottom:1px solid rgba(255,255,255,.08)}
+  .div2{flex-direction:column-reverse;align-items:stretch;gap:12px}
+  .div2 a{width:100%;padding:12px;font-size:15px;border-radius:12px}
+}
+ 
+/* ===== صفحه ===== */
+html,body{margin:0}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--text);font-family:"Vazirmatn",Tahoma,sans-serif;min-height:100vh;display:flex;flex-direction:column}
+.page{flex:1;display:grid;place-items:center;padding:20px}
+.shell{display:grid;grid-template-columns:1fr 1fr;width:min(980px,100%);min-height:600px;background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 10px 40px rgba(20,40,60,.18)}
+ 
+/* ⬇⬇⬇ این یک خط را با خط اصلی .side{...} خودت (که عکس base64 دارد) جایگزین کن ⬇⬇⬇ */
+.side{position:relative;background:#2a6fb0 url("https://iili.io/nLwJS8F.png") center/cover no-repeat;color:#fff;padding:48px 36px}
+/* ⬆⬆⬆ پایان خطی که باید جایگزین شود ⬆⬆⬆ */
+ 
+.side::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,30,60,.55),rgba(8,30,60,0) 55%)}
+.side>*{position:relative;z-index:1}
+.side h2{margin:0 0 12px;font-size:28px;line-height:1.5}
+.side p{margin:0;font-size:15px;line-height:2;max-width:26ch;opacity:.95}
+.panel{padding:48px 44px;display:flex;flex-direction:column;justify-content:center}
+.view{display:none}
+.view.on{display:block}
+h1{margin:0 0 28px;font-size:22px;text-align:center}
+.field{position:relative;margin-bottom:14px}
+.field input{width:100%;height:48px;border:1px solid var(--line);background:var(--field);color:var(--text);border-radius:8px;padding:0 44px 0 44px;font:inherit;font-size:14px}
+.field input::placeholder{color:var(--muted)}
+.field input:focus-visible{outline:2px solid var(--brand);outline-offset:1px;border-color:var(--brand)}
+.field .ico{position:absolute;top:50%;right:14px;transform:translateY(-50%);width:18px;height:18px;color:var(--muted);pointer-events:none}
+.eye{position:absolute;top:50%;left:8px;transform:translateY(-50%);width:32px;height:32px;border:0;background:none;color:var(--muted);cursor:pointer;border-radius:6px;display:grid;place-items:center}
+.eye:focus-visible{outline:2px solid var(--brand)}
+.eye svg{width:18px;height:18px}
+.msg{display:none;color:var(--err);font-size:12.5px;margin:-6px 0 12px}
+.row{display:flex;justify-content:space-between;align-items:center;font-size:13px;margin:4px 0 20px;gap:10px}
+.row label{display:flex;align-items:center;gap:8px;color:var(--muted);cursor:pointer}
+.row input{accent-color:var(--brand);width:16px;height:16px}
+a{color:var(--brand);text-decoration:none;font-weight:500}
+a:hover{text-decoration:none}
+
+.toast-container {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: 90%;
+    max-width: 420px;
+}
+
+
+.welcome-toast {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    color: white;
+    padding: 18px 28px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 99999;
+    box-shadow: 0 8px 25px rgba(0,0,0,.3);
+    animation: showToast .4s ease;
+}
+
+.check-icon {
+    font-size: 24px;
+}
+
+@keyframes showToast {
+    from {
+        opacity: 0;
+        top: 0;
+    }
+    to {
+        opacity: 1;
+        top: 25px;
+    }
+}
+
+a:focus-visible,.btn:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:4px}
+.btn{width:100%;height:48px;border:0;border-radius:8px;background:var(--brand);color:#fff;font:inherit;font-weight:700;font-size:15px;cursor:pointer}
+.btn:hover{background:var(--brand-d)}
+.alt{text-align:center;font-size:14px;color:var(--muted);margin-top:26px}
+.ok{display:none;text-align:center;color:var(--brand);font-size:14px;margin-top:16px}
+.terms{margin:4px 0 20px}
+@media (max-width:760px){
+ .page{padding:0;place-items:stretch}
+ .shell{grid-template-columns:1fr;border-radius:0;min-height:0;box-shadow:none}
+ .side{padding:36px 24px;min-height:50vh;min-height:50svh;order:-1;background-position:center bottom;text-align:center}
+ .side h2{font-size:24px}.side p{font-size:14px;line-height:1.9;margin-inline:auto}
+ .panel{padding:28px 22px 36px}
+}
+</style>
+</head>
+<body>
+    <nav class="nav">
+        <h1>iran tour</h1>
+ 
+        <button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو" aria-expanded="false" aria-controls="menu">☰</button>
+ 
+        <div class="menu" id="menu">
+            <div class="div1">
+                <a href="{% url 'home_url' %}">صفحه اصلی</a>
+                <a href="{% url 'about_url' %}">درباره ما </a>
+                <a href="{% url 'maghsad_url' %}">مقاصد گردشگری</a>
+                <a href="">نمی دونی کجا بری ؟ </a>
+            </div>
+            <div class="div2">
+                <a href="{% url 'login_register_url' %}">ورود / ثبت نام</a>
+            </div>
+        </div>
+    </nav>
+ 
+<div class="page">
+<main class="shell">
+ <section class="side">
+  <h2>به ایران تور خوش آمدید</h2>
+  <p>برای دسترسی به امکانات بیشتر، وارد حساب کاربری خود شوید.</p>
+ </section>
+ 
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="welcome-toast">
+            <span class="check-icon">✓</span>
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+ <section class="panel">
+  <!-- ورود -->
+  <div class="view" id="login">
+   <h1>ورود به حساب کاربری</h1>
+   <form id="loginForm" novalidate method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="type" value="login">
+    <div class="field">
+     <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+     <input name="username" type="text" placeholder="ایمیل یا نام کاربری" autocomplete="username" aria-label="ایمیل یا نام کاربری">
+    </div>
+    <div class="field">
+     <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+     <input name="password" type="password" placeholder="رمز عبور" autocomplete="current-password" aria-label="رمز عبور">
+     <button type="button" class="eye" aria-label="نمایش رمز"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+    </div>
+    <p class="msg" id="loginMsg" role="alert"></p>
+    <div class="row">
+     <label><input type="checkbox" name="remember"> مرا به خاطر بسپار</label>
+     <a href="#forgot">رمز عبور را فراموش کرده‌ام؟</a>
+    </div>
+    <button class="btn" type="submit">ورود</button>
+    <p class="ok" id="loginOk">ورود انجام شد.</p>
+   </form>
+   <p class="alt">حساب کاربری ندارید؟ <a href="#register">ثبت نام کنید</a></p>
+  </div>
+ 
+  <!-- ثبت نام -->
+  <div class="view" id="register">
+   <h1>ساخت حساب کاربری</h1>
+   <form id="regForm" novalidate method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="type" value="register">
+    <div class="field">
+     <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+     <input name="username" type="text" placeholder="نام و نام خانوادگی" autocomplete="name" aria-label="نام و نام خانوادگی">
+    </div>
+    <div class="field">
+     <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+     <input name="email" type="email" placeholder="ایمیل" autocomplete="email" aria-label="ایمیل" dir="ltr" style="text-align:right">
+    </div>
+    <div class="field">
+     <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+     <input name="phone" type="tel" placeholder="شماره موبایل" autocomplete="tel" aria-label="شماره موبایل" dir="ltr" style="text-align:right">
+    </div>
+    <div class="field">
+     <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+     <input name="password" type="password" placeholder="رمز عبور (حداقل ۸ کاراکتر)" autocomplete="new-password" aria-label="رمز عبور">
+     <button type="button" class="eye" aria-label="نمایش رمز"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></button>
+    </div>
+    <div class="field">
+     <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+     <input name="password2" type="password" placeholder="تکرار رمز عبور" autocomplete="new-password" aria-label="تکرار رمز عبور">
+    </div>
+    <div class="row terms"><label><input type="checkbox" name="terms"> قوانین و مقررات را می‌پذیرم</label></div>
+    <p class="msg" id="regMsg" role="alert"></p>
+    <button class="btn" type="submit">ثبت نام</button>
+    <p class="ok" id="regOk">حساب شما ساخته شد.</p>
+   </form>
+   <p class="alt">قبلاً ثبت نام کرده‌اید؟ <a href="#login">وارد شوید</a></p>
+  </div>
+ </section>
+</main>
+</div>
+ 
+<script>
+
+setTimeout(function() {
+    document.querySelectorAll('.welcome-toast').forEach(function(el) {
+        el.style.transition = 'opacity .5s';
+        el.style.opacity = '0';
+
+        setTimeout(function() {
+            el.remove();
+        }, 500);
+    });
+}, 2000);
+
+  
+(function(){
+ var views={login:document.getElementById('login'),register:document.getElementById('register')};
+ function show(){
+  var h=(location.hash||'').replace('#','');
+  if(!views[h]) h='login';
+  for(var k in views) views[k].classList.toggle('on',k===h);
+  document.title=(h==='login'?'ورود':'ثبت نام')+' | ایران تور';
+ }
+ window.addEventListener('hashchange',show);show();
+ 
+ document.querySelectorAll('.eye').forEach(function(b){
+  b.addEventListener('click',function(){
+   var i=b.parentNode.querySelector('input');
+   i.type=i.type==='password'?'text':'password';
+  });
+ });
+ 
+ function err(el,t){el.textContent=t;el.style.display=t?'block':'none'}
+ 
+ document.getElementById('loginForm').addEventListener('submit',function(e){
+  var f=e.target,m=document.getElementById('loginMsg'),ok=document.getElementById('loginOk');
+  ok.style.display='none';
+  if(!f.user.value.trim()) return err(m,'ایمیل یا نام کاربری را وارد کنید.');
+  if(!f.pass.value) return err(m,'رمز عبور را وارد کنید.');
+  err(m,'');ok.style.display='block';
+  /* اینجا درخواست ورود را به سرورِ خودتان بفرستید */
+ });
+ 
+ document.getElementById('regForm').addEventListener('submit',function(e){
+  var f=e.target,m=document.getElementById('regMsg'),ok=document.getElementById('regOk');
+  ok.style.display='none';
+  if(!f.name.value.trim()) return err(m,'نام و نام خانوادگی را وارد کنید.');
+  if(!/^\S+@\S+\.\S+$/.test(f.email.value)) return err(m,'ایمیل معتبر وارد کنید.');
+  if(f.phone.value && !/^(\+98|0)?9\d{9}$/.test(f.phone.value.replace(/\s/g,''))) return err(m,'شماره موبایل معتبر نیست.');
+  if(f.pass.value.length<8) return err(m,'رمز عبور باید حداقل ۸ کاراکتر باشد.');
+  if(f.pass.value!==f.pass2.value) return err(m,'تکرار رمز عبور با رمز عبور یکی نیست.');
+  if(!f.terms.checked) return err(m,'برای ادامه باید قوانین را بپذیرید.');
+  err(m,'');ok.style.display='block';
+  /* اینجا درخواست ثبت‌نام را به سرورِ خودتان بفرستید */
+ });
+ 
+ /* منوی همبرگری */
+ var toggle=document.getElementById('menuToggle'),menu=document.getElementById('menu');
+ toggle.addEventListener('click',function(){
+  var open=menu.classList.toggle('open');
+  toggle.setAttribute('aria-expanded',open);
+  toggle.textContent=open?'✕':'☰';
+ });
+})();
+</script>
+</body>
+</html>
